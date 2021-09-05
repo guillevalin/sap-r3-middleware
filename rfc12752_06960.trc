@@ -1,0 +1,97 @@
+
+**** Trace file opened at 2021-08-24 15:39:17.708604 UTC-04:00 (Pacific SA Daylight Time), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 8, Compiled on Apr 17 2021 03:23:42
+ CPIC library: 753.2020.03.230 version 3, NI library: 40, Kernel Release: 753 Patch Level 814
+ Current working directory: C:\Users\conta\Documents\CotalkerRepositories\svc-sap-r3, Program: node
+ Hardware: PC with Windows NT 20x AMD64 Level 6 (Mod 165 Step 5), Operating_system: Windows NT 10.0
+ Hostname: GUILLERMOPC, IP address: 192.168.100.14, IPv6 address: ::1
+
+2021-08-24 15:39:17.708724 [06960] >> RfcOpenConnection
+>> RfcOptions
+	Partner Char Size: 1
+	Client: 100
+	User: admin
+	Alias: 
+	Passwd: (- secret -)
+	Language: S
+	SysNr: 00
+	ASHost: 54.164.223.166
+	ASService: 
+	GWHost: 
+	GWService: 
+	R3Name: 
+	MSHost: 
+	MSService: 
+	TLS Cryptolib: 
+	TLS Trust All: Off
+	Codepage: 1100
+	Trace: 3
+	LogonCheck: 1
+	CompressionType: 1
+	Serialization: 0
+	Ignore Char Conv Errors: 0
+	Substitution Char: 35
+	UseRoundtripOptimization: 0
+	SO Keepalive: 0
+	CPIC Keepalive: 0
+	Delta Manager: 1
+<< RfcOptions
+
+2021-08-24 15:39:17.711908 [06960] 	>> RfcOptions::determineType
+determined type RFC_CLIENT
+2021-08-24 15:39:17.711954 [06960] 	<< RfcOptions::determineType returned 0
+
+2021-08-24 15:39:17.711967 [06960] 	>> RfcConnection::openNew
+2021-08-24 15:39:17.712001 [06960] 	>> RfcConnection::connect
+2021-08-24 15:39:17.712014 [06960] 	>> CpicConnection::connectAsClient
+2021-08-24 15:39:39.281494 [06960] 	<< CpicConnection::connectAsClient returned 1
+
+2021-08-24 15:39:39.281553 [06960] 	<< RfcConnection::connect returned 1
+
+2021-08-24 15:39:39.281983 [06960] >> Exception occurred
+	[Handle: 2793118920896	ConvID: 25399134	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    SAP-Gateway on host laboratorio.cotalker.int / sapgw00
+ERROR       partner 'ec2-54-164-223-166.compute-1.amazonaws.com:sapgw00'
+            not reached
+TIME        Tue Aug 24 03:38:52 2021
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 54.164.223.166:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+2021-08-24 15:39:39.282030 [06960] 	<< RfcConnection::openNew returned 1
+
+2021-08-24 15:39:39.282049 [06960] 	>> RfcConnection::disconnect
+2021-08-24 15:39:39.282064 [06960] 	>> CpicConnection::close
+2021-08-24 15:39:39.282080 [06960] 	<< CpicConnection::close returned 0
+
+2021-08-24 15:39:39.282095 [06960] 	<< RfcConnection::disconnect returned 0
+
+2021-08-24 15:39:39.282129 [06960] << RfcOpenConnection returned RFC_COMMUNICATION_FAILURE
+	RFC_ERROR_INFO.key: RFC_COMMUNICATION_FAILURE
+	RFC_ERROR_INFO.message: 
+LOCATION    SAP-Gateway on host laboratorio.cotalker.int / sapgw00
+ERROR       partner 'ec2-54-164-223-166.compute-1.amazonaws.com:sapgw00'
+            not reached
+TIME        Tue Aug 24 03:38:52 2021
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 54.164.223.166:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+
