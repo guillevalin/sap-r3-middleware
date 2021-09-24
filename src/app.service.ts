@@ -8,36 +8,45 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async test(): Promise<void> {
+  async test(): Promise<string> {
     try {
       // open connection
       const client = new noderfc.Client({ dest: "COTALKER_LAB" } as RfcConnectionParameters);
       await client.open();
-      console.log(client.connectionInfo);
   
-      // invoke ABAP function module, passing structure and table parameters
-  
-      // ABAP structure
-      const abap_structure = {
-        RFCINT4: 345,
-        RFCFLOAT: 1.23456789,
-        RFCCHAR4: "ABCD",
-        RFCDATE: "20180625", // ABAP date format
-        // or RFCDATE: new Date('2018-06-25'), // as JavaScript Date object, with clientOption "date"
-      };
-      // ABAP table
-      let abap_table = [abap_structure];
-  
-      const result = await client.call("STFC_STRUCTURE", {
-        IMPORTSTRUCT: abap_structure,
-        RFCTABLE: abap_table,
+      const createNotification: any = await client.call('BAPI_ALM_NOTIF_CREATE', {
+        NOTIF_TYPE: 'M1',
+        NOTIFHEADER: {
+          PRIORITY: '1',
+          SHORT_TEXT: 'Prueba desde integración',
+          // EQUIPMENT: '',
+          FUNCT_LOC: 'C-X'
+        }
       });
-  
-      // check the result
-      console.log(result);
+
+      console.log(createNotification);
+
+      const saveNotification: any = await client.call('BAPI_ALM_NOTIF_SAVE', {
+        NUMBER: createNotification.NOTIFHEADER_EXPORT.NOTIF_NO.toString(),
+      });
+
+      console.log(saveNotification);
+
+      const commitTransaction = await client.call('BAPI_TRANSACTION_COMMIT', {
+        WAIT: 'X'
+      });
+
+      console.log(commitTransaction);
+
+      console.log(`Se ha creado la notificación ${saveNotification.NOTIFHEADER.NOTIF_NO} con descripción ${saveNotification.NOTIFHEADER.SHORT_TEXT} con prioridad ${saveNotification.NOTIFHEADER.PRIORITY}`);
+
+      await client.close();
+
+      return saveNotification.NOTIFHEADER.NOTIF_NO;
     } catch (err) {
       // connection and invocation errors
       console.error(err);
+      return 'Error';
     }
   }
 }
